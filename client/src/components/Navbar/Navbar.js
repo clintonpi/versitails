@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Navbar.scss';
+import Share from '../Share/Share';
 
 class Navbar extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Navbar extends Component {
         </div>
         <div className="nav-btn-wrapper flex">
           <NavLink to="/" tabIndex="-1"><button className="nav-btn pill highlight" aria-label="home"><FontAwesomeIcon icon="home" /></button></NavLink>
-          <button className="nav-btn pill highlight" aria-label="share"><FontAwesomeIcon icon="share-alt" /></button>
+          <Share />
           <button className="nav-btn pill highlight" aria-label="switch to default theme" onClick={ this.switchToDefault }><FontAwesomeIcon icon="sun" /></button>
           <button className="nav-btn switch pos-rl" aria-label="toggle theme" data-theme={ this.theme } onClick={ this.toggleTheme }>
             <span className="track block" />
