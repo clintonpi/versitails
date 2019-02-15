@@ -1,0 +1,17 @@
+$shadow-color: rgba($color: #000000, $alpha: 0.3);
+$glow-color: rgba($color: #ffffff, $alpha: 0.3);
+$shadow-size-sm: 0 0 3px;
+$shadow-size-bg: 0 5px 20px;
+$box-shadow-sm: $shadow-size-sm $shadow-color;
+$box-glow-sm: $shadow-size-sm $glow-color;
+$box-shadow-bg: $shadow-size-bg $shadow-color;
+$box-glow-bg: $shadow-size-bg $glow-color;
+$color1: #ffffff;
+$color2: #e6ecf0;
+$color3:  #485460;
+$color4: #1e272e;
+$green: #27ae60;
+$main-text: 'Montserrat', sans-serif;
+$sub-text: 'Roboto', sans-serif;
+$spacing: 10px;
+$transition: .3s;

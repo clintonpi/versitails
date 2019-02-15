@@ -1,0 +1,112 @@
+@import '../../partials/variables';
+
+nav {
+  padding: 10px 0;
+  
+  * {
+    color: $color3;
+  }
+
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    letter-spacing: -1px;
+    margin: auto 0 auto 10px;
+  }
+}
+
+.dark nav * {
+  color: $color2;
+}
+
+.logo {
+  padding: 0 15px;
+
+  a {
+    display: inline-flex;
+
+    &:hover, &:focus {
+      .green {
+        color: $green;
+      }
+
+      .yellow {
+        color: #f39c12;
+      }
+    }
+  }
+}
+
+.nav-btn-wrapper > * {
+  margin: auto 5px;
+}
+
+.nav-btn {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 50%;
+  text-align: center;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.pill {
+  width: 38px;
+  height: 38px;
+  line-height: 19px;
+}
+
+.switch {
+  padding: 0;
+
+  &:hover .handle, &:focus .handle {
+    box-shadow: 0 0 10px 2px $shadow-color;
+  }
+
+  &[data-theme="dark"] .handle {
+    left: calc(100% - 30px);
+  }
+}
+
+.dark .switch {
+  &:hover, &:focus {
+    .handle {
+      box-shadow: 0 0 10px 2px $glow-color;
+    }
+  }
+}
+
+.track {
+  width: 50px;
+  height: 20px;
+  background-color: $color3;
+  border-radius: 20px;
+}
+
+.dark .track {
+  background-color: $color2;
+}
+
+.handle {
+  width: 30px;
+  height: 30px;
+  background-color: $color2;
+  box-shadow: 0 0 10px $shadow-color;
+}
+
+.dark .handle {
+  background-color: $color3;
+  box-shadow: 0 0 10px $glow-color;
+}
+
+@media (max-width: 500px) {
+  nav h1 {
+    display: none;
+  }
+
+  .nav-btn-wrapper > * {
+    margin: auto 3px;
+  }
+}
