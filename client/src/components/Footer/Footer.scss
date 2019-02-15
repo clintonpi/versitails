@@ -1,0 +1,14 @@
+@import '../../partials/variables';
+
+footer {
+  padding: 0 5px 20px;
+
+  a {
+    color: $color4;
+    text-decoration: underline;
+  }
+}
+
+.dark footer a {
+  color: $color1;
+}

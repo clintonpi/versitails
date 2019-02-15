@@ -10,6 +10,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 import './Root.scss';
 import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 
 library.add(faEllipsisH, faHome, faShareAlt, faSun, faMoon, faCheckCircle, faHeart);
 
@@ -68,6 +69,7 @@ class Root extends Component {
         <BrowserRouter>
           <div className={ `container${this.theme === this.dark ? ' dark' : ''}` }>
             <Navbar toggleTheme={ this.toggleTheme } theme={ this.theme } />
+            <Footer />
           </div>
         </BrowserRouter>
     );
