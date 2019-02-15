@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons/faEllipsisH';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
@@ -10,6 +10,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 import './Root.scss';
 import Navbar from '../Navbar/Navbar';
+import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
 
 library.add(faEllipsisH, faHome, faShareAlt, faSun, faMoon, faCheckCircle, faHeart);
@@ -69,6 +70,7 @@ class Root extends Component {
         <BrowserRouter>
           <div className={ `container${this.theme === this.dark ? ' dark' : ''}` }>
             <Navbar toggleTheme={ this.toggleTheme } theme={ this.theme } />
+            <Route exact path='/' component={ Home } />
             <Footer />
           </div>
         </BrowserRouter>

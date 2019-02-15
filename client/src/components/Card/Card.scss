@@ -1,0 +1,25 @@
+@import '../../partials/variables';
+
+.card {
+  margin: 20px auto;
+  width: 400px;
+  min-height: 150px;
+  border-radius: 0 0 10px 10px;
+
+  img {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 860px) {
+  .card {
+    width: 600px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    margin: 10px auto;
+  }
+}
