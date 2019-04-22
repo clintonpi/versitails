@@ -3,6 +3,7 @@ const autoprefixer = require('autoprefixer');
 const Imagemin = require('imagemin-webpack');
 const imageminPngQuant = require('imagemin-pngquant');
 const imageminSvgo = require('imagemin-svgo');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const webpack = require('webpack');
@@ -44,7 +45,12 @@ const config = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development'
+            },
+          },
           'css-loader',
           'clean-css-loader',
           postCSSLoader,
@@ -86,6 +92,10 @@ const config = {
     }),
     new webpack.DefinePlugin({ 'global.GENTLY': false }),
     new webpack.NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: '[id].css'
+    }),
     new WriteFilePlugin(),
   ],
   devServer: {
