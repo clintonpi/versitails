@@ -11,6 +11,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 import './Root.scss';
 import Navbar from '../Navbar/Navbar';
 import Home from '../Home/Home';
+import News from '../News/News';
 import Footer from '../Footer/Footer';
 
 library.add(faEllipsisH, faHome, faShareAlt, faSun, faMoon, faCheckCircle, faHeart);
@@ -71,6 +72,7 @@ class Root extends Component {
           <div className={ `container${this.theme === this.dark ? ' dark' : ''}` }>
             <Navbar toggleTheme={ this.toggleTheme } theme={ this.theme } />
             <Route exact path='/' component={ Home } />
+            <Route exact path='/news' component={ News } />
             <Footer />
           </div>
         </BrowserRouter>
