@@ -6,13 +6,15 @@ const webpackDevMiddleWare = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.config');
 
+const ENVIRONMENT = process.env.NODE_ENV;
+
 dotenv.config();
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '..', 'client')));
 
-if (process.env.NODE_ENV === 'development') {
+if (ENVIRONMENT === 'development' || ENVIRONMENT === 'development:client') {
   // Attach webpack dev server to running app
   ((serverInstance) => {
     const options = {

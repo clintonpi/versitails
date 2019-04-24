@@ -48,7 +48,7 @@ const config = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: process.env.NODE_ENV === 'development'
+              hmr: ENVIRONMENT === 'development' || ENVIRONMENT === 'development:client'
             },
           },
           'css-loader',
@@ -112,7 +112,7 @@ const config = {
   target: 'web'
 };
 
-if (ENVIRONMENT === 'development') {
+if (ENVIRONMENT === 'development' || ENVIRONMENT === 'development:client') {
   // add modules for hot reloading
   config.entry.bundle.unshift('webpack-hot-middleware/client');
   config.entry.bundle.unshift('webpack/hot/dev-server');

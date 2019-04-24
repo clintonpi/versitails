@@ -5,7 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "rm -rf client/dist && NODE_ENV=production webpack --config webpack.config.js --progress --colors",
-    "dev": "rm -rf client/dist && NODE_ENV=development node server/app.js",
+    "dev": "rm -rf client/dist && NODE_ENV=development nodemon server/app.js",
+    "dev:client": "rm -rf client/dist && NODE_ENV=development:client node server/app.js",
+    "dev:server": "rm -rf client/dist && npm run build && NODE_ENV=development:server nodemon server/app.js",
     "lint": "eslint ./ || true",
     "start": "npm run build && NODE_ENV=production node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -63,6 +65,7 @@
     "imagemin-webpack": "4.1.0",
     "mini-css-extract-plugin": "0.6.0",
     "node-sass": "4.11.0",
+    "nodemon": "1.18.11",
     "postcss-loader": "3.0.0",
     "sass-loader": "7.1.0",
     "uglifyjs-webpack-plugin": "2.1.2",
