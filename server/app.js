@@ -1,3 +1,4 @@
+const axios = require('axios');
 const express = require('express');
 const dotenv = require('dotenv');
 const compiler = require('webpack');
@@ -30,6 +31,20 @@ if (ENVIRONMENT === 'development' || ENVIRONMENT === 'development:client') {
 }
 
 const PORT = process.env.PORT || 2251;
+
+app.get('/api/v1/news', (req, res) => {
+  const { keyword, pageNumber } = req.query;
+
+  axios.get(`https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=${pageNumber}&pageSize=10&q=${keyword}&safeSearch=true`, {
+    headers: {
+      'X-RapidAPI-Key': process.env.XRapidAPIKey
+    }
+  })
+    .then(newsRes => res.status(200).json(newsRes.data))
+    .catch(() => {
+      res.sendStatus(400);
+    });
+});
 
 app.get('*', (req, res) => {
   const { host } = req.headers;
