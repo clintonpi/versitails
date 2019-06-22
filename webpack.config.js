@@ -17,7 +17,7 @@ const postCSSLoader = {
     plugins() {
       return [
         autoprefixer({
-          browsers: ['last 3 versions']
+          overrideBrowserslist: ['last 3 versions']
         })
       ];
     }
