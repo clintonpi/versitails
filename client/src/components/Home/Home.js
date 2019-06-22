@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './Home.scss';
 import features from './features';
 import Card from '../Card/Card';
+import { documentTitle } from '../../utils';
 
 const Home = () => {
+  document.title = `${documentTitle}Home`;
   scroll(0, 0);
   return (
-    <main className="home flex">
+    <Fragment>
+      <h2 className="main-text">Home</h2>
+      <main className="home flex">
       {
         features.map(feature => (
           <Card
@@ -21,6 +25,7 @@ const Home = () => {
         ))
       }
     </main>
+    </Fragment>
   );
 };
 

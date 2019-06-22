@@ -31,7 +31,7 @@ const Article = ({
 }) => (
   <a href={ url } target="_blank" rel="noopener noreferrer" className="w-700 mx-w-100 m-t-10 m-b-10 m-auto p-10 bc-c1 bd-r-5 bx-sh ol-0 ttn-3">
     <small className="sub-text">{ source }</small>
-    <h2 className="main-text m-t-10">{ removeBoldTag(title) }</h2>
+    <h3 className="main-text m-t-10">{ removeBoldTag(title) }</h3>
     <div className="m-t-10 m-b-10">
       <div style={{ backgroundImage: `url(${thumbnail})` }} className="fill-bg sq-80 bd-r-5 bc-c2 ttn-3" />
       <p className="break-word sub-text m-t-10">{ formatDescription(removeBoldTag(description)) }</p>

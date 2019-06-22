@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react';
 import './News.scss';
 import Article from '../Article/Article';
 import ArticleSkeleton from '../ArticleSkeleton/ArticleSkeleton';
-
-const reload = () => location.reload();
+import { documentTitle, reload } from '../../utils';
 
 class News extends Component {
   constructor(props) {
@@ -46,18 +45,22 @@ class News extends Component {
   }
 
   render() {
+    document.title = `${documentTitle}News Update`;
     scroll(0, 0);
 
     if (this.state.error) {
       return (
-        <main className="news flex">
-          <div className="w-700 mx-w-100 m-t-10 m-b-10 m-auto p-10 bc-c1 bd-r-5 bx-sh-fx">
-          <h3 className="main-text txt-al-c">Oops...</h3>
-          <p className="sub-text m-t-10 txt-al-c">We tried our very best but still couldn&apos;t fetch your news 😢.</p>
-          <small className="sub-text m-t-10 block txt-al-c">Please, check your internet connection.</small>
-          <button className="sub-text bd-0 p-10 bd-r-20 block m-auto m-t-10 pointer bc-c2 bx-sh ol-0 ttn-3" onClick={ reload }>Try again</button>
-          </div>
-        </main>
+        <Fragment>
+          <h2 className="main-text">News Update</h2>
+          <main className="news flex">
+            <div className="w-700 mx-w-100 m-t-10 m-b-10 m-auto p-10 bc-c1 bd-r-5 bx-sh-fx">
+            <h3 className="main-text txt-al-c">Oops...</h3>
+            <p className="sub-text m-t-10 txt-al-c">We tried our very best but still couldn&apos;t fetch your news 😢.</p>
+            <small className="sub-text m-t-10 block txt-al-c">Please, check your internet connection.</small>
+            <button className="sub-text bd-0 p-10 bd-r-20 block m-auto m-t-10 pointer bc-c2 bx-sh ol-0 ttn-3" onClick={ reload }>Try again</button>
+            </div>
+          </main>
+        </Fragment>
       );
     }
 
@@ -86,9 +89,12 @@ class News extends Component {
     );
 
     return (
-      <main className="news flex">
-        { articlesList }
-      </main>
+      <Fragment>
+        <h2 className="main-text">News Update</h2>
+        <main className="news flex">
+          { articlesList }
+        </main>
+      </Fragment>
     );
   }
 }
