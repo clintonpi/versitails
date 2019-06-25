@@ -82,8 +82,16 @@ h3 {
   flex-direction: row;
 }
 
+.column {
+  flex-direction: column;
+}
+
 .jst-cnt-sa {
   justify-content: space-around;
+}
+
+.jst-cnt-sb {
+  justify-content: space-between;
 }
 
 .w-100 {
@@ -278,6 +286,14 @@ h3 {
 
 .fs-in, .fs-in * {
   font-size: inherit;
+}
+
+.z-in-0 {
+  z-index: 0;
+}
+
+.z-in-m1 {
+  z-index: -1;
 }
 
 .loader {

@@ -12,6 +12,7 @@ import './Root.scss';
 import Navbar from '../Navbar/Navbar';
 import Home from '../Home/Home';
 import News from '../News/News';
+import AggregateCalc from '../AggregateCalc/AggregateCalc';
 import Footer from '../Footer/Footer';
 
 library.add(faEllipsisH, faHome, faShareAlt, faSun, faMoon, faCheckCircle, faHeart);
@@ -69,10 +70,11 @@ class Root extends Component {
 
     return (
         <BrowserRouter>
-          <div className={ `container${this.theme === this.dark ? ' dark' : ''}` }>
+          <div className={ `container${this.theme === this.dark ? ' dark' : ''} pos-rl z-in-0` }>
             <Navbar toggleTheme={ this.toggleTheme } theme={ this.theme } />
             <Route exact path='/' component={ Home } />
             <Route exact path='/news' component={ News } />
+            <Route exact path='/calculate-aggregate-score' component={ AggregateCalc } />
             <Footer />
           </div>
         </BrowserRouter>

@@ -1,0 +1,31 @@
+@import '../../partials/variables';
+
+.agg-card {
+  padding: 20px;
+}
+
+.at-back {
+  transform: rotateY(-180deg);
+  z-index: -1;
+  visibility: hidden; // Just to make it unfocusable
+}
+
+.outer-agg-circle {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+}
+
+.agg-circle {
+  width: 170px;
+  height: 170px;
+  border: 8px solid $color1;
+}
+
+.dark .agg-circle {
+  border-color: $color4;
+}
+
+.aggregate {
+  font-size: 2.5rem;
+}
