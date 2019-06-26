@@ -14,10 +14,14 @@ class News extends Component {
       pageNumber: 1
     };
 
+    this.title = 'News Update';
     this.mounted = false;
   }
 
   componentDidMount() {
+    document.title = `${documentTitle}${this.title}`;
+    scroll(0, 0);
+
     this.mounted = true;
 
     const words = ['asuu', 'jamb', 'nigerian university', 'utme', 'waec', 'nigeria'];
@@ -45,13 +49,10 @@ class News extends Component {
   }
 
   render() {
-    document.title = `${documentTitle}News Update`;
-    scroll(0, 0);
-
     if (this.state.error) {
       return (
         <Fragment>
-          <h2 className="main-text">News Update</h2>
+          <h2 className="main-text">{ this.title }</h2>
           <main className="news flex">
             <div className="w-700 mx-w-100 m-t-10 m-b-10 m-auto p-10 bc-c1 bd-r-5 bx-sh-fx">
             <h3 className="main-text txt-al-c">Oops...</h3>
@@ -90,7 +91,7 @@ class News extends Component {
 
     return (
       <Fragment>
-        <h2 className="main-text">News Update</h2>
+        <h2 className="main-text">{ this.title }</h2>
         <main className="news flex">
           { articlesList }
         </main>
