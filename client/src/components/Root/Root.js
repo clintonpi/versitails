@@ -14,6 +14,7 @@ import Home from '../Home/Home';
 import News from '../News/News';
 import AggregateCalc from '../AggregateCalc/AggregateCalc';
 import CourseReq from '../CourseReq/CourseReq';
+import AdmissionProb from '../AdmissionProb/AdmissionProb';
 import Footer from '../Footer/Footer';
 
 library.add(faEllipsisH, faHome, faShareAlt, faSun, faMoon, faCheckCircle, faHeart);
@@ -77,6 +78,7 @@ class Root extends Component {
             <Route exact path='/news' component={ News } />
             <Route exact path='/calculate-aggregate-score' component={ AggregateCalc } />
             <Route exact path='/course-requirements' component={ CourseReq } />
+            <Route exact path='/admission-probability' component={ AdmissionProb } />
             <Footer />
           </div>
         </BrowserRouter>
