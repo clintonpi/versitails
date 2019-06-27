@@ -6,6 +6,7 @@ const path = require('path');
 const webpackDevMiddleWare = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('../webpack.config');
+const pool = require('./db/index.js');
 
 const ENVIRONMENT = process.env.NODE_ENV;
 
@@ -44,6 +45,31 @@ app.get('/api/v1/news', (req, res) => {
     .catch(() => {
       res.sendStatus(400);
     });
+});
+
+app.get('/api/v1/admission-probability', (req, res) => {
+  const { faculty, course } = req.query;
+  let { aggregate } = req.query;
+  aggregate = parseFloat(aggregate);
+
+  if (aggregate < 0 || aggregate > 100) return res.status(400).json({ message: 'Your aggregate is invalid.' });
+
+  const text = 'SELECT merit FROM cutoff_marks WHERE year > 2016 AND faculty = $1 AND department = $2;';
+  const values = [faculty, course];
+
+  pool.query(text, values)
+    .then((result) => {
+      const resultRowsLength = result.rows.length;
+
+      if (resultRowsLength === 0) return res.status(400).json({ message: 'Your selection is invalid.' });
+
+      const average = (result.rows.reduce((sum, row) => sum + row.merit, 0)) / resultRowsLength;
+      const probabilityPercent = parseFloat((aggregate ** 2) / average).toFixed(2);
+      // i.e (aggregate / 100) * (aggregate / average) * 100
+
+      return res.status(200).json({ message: `You have about a/an ${probabilityPercent}% chance based on previous cut-off marks only.` });
+    })
+    .catch(() => res.status(500).json({ message: 'There was an error while processing your request.' }));
 });
 
 app.get('*', (req, res) => {
