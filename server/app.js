@@ -48,11 +48,13 @@ app.get('/api/v1/news', (req, res) => {
 });
 
 app.get('/api/v1/admission-probability', (req, res) => {
-  const { faculty, course } = req.query;
-  let { aggregate } = req.query;
+  const { faculty } = req.query;
+  let { course, aggregate } = req.query;
   aggregate = parseFloat(aggregate);
 
   if (aggregate < 0 || aggregate > 100) return res.status(400).json({ message: 'Your aggregate is invalid.' });
+
+  course = course.indexOf(' and ') > -1 ? course.replace('and', '&') : course;
 
   const text = 'SELECT merit FROM cutoff_marks WHERE year > 2016 AND faculty = $1 AND department = $2;';
   const values = [faculty, course];

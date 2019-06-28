@@ -1,11 +1,11 @@
 const faculties = {
-  Arts: ['Creative Arts', 'English', 'European Languages/French', 'European Languages/Russian', 'History & Strategic Studies', 'Linguistics/Igbo', 'Linguistics/Yoruba', 'Chinese', 'Philosophy', 'Religious Studies'],
+  Arts: ['Creative Arts', 'English', 'European Languages/French', 'European Languages/Russian', 'History and Strategic Studies', 'Linguistics/Igbo', 'Linguistics/Yoruba', 'Chinese', 'Philosophy', 'Religious Studies'],
 
   'Business Administration': ['Accounting', 'Actuarial Science', 'Business Administration', 'Finance', 'I.R.P.M', 'Insurance'],
 
   Education: ['Adult', 'Biology', 'Business Education', 'C.R.S.', 'Chemistry', 'Early Childhood', 'Economics Education', 'Education Administration', 'Education French', 'Education Geography', 'Educational Foundations', 'English Education', 'Health Education', 'History Education', 'Home Economics Education', 'Human Kinetics', 'Igbo Education', 'Integrated Science', 'Islamic Studies Education', 'Mathematics', 'Physics', 'Technology Education', 'Yoruba Education'],
 
-  Engineering: ['Biomedical', 'Chemical', 'Civil', 'Computer', 'Electrical', 'Mechanical', 'Metallurgical & Materials', 'Petroleum & Gas', 'Surveying & Geoinfomatics', 'Systems'],
+  Engineering: ['Biomedical', 'Chemical', 'Civil', 'Computer', 'Electrical', 'Mechanical', 'Metallurgical and Materials', 'Petroleum and Gas', 'Surveying and Geoinfomatics', 'Systems'],
 
   'Environmental Sciences': ['Architecture', 'Building', 'Estate Management', 'Quantity Surveying', 'Urban Regional Planning'],
 
