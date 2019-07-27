@@ -1,8 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const Imagemin = require('imagemin-webpack');
-const imageminPngQuant = require('imagemin-pngquant');
-const imageminSvgo = require('imagemin-svgo');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
@@ -133,8 +131,8 @@ if (ENVIRONMENT === 'development' || ENVIRONMENT === 'development:client') {
 
   const imageminOptions = {
     plugins: [
-      imageminPngQuant(),
-      imageminSvgo()
+      ['pngquant'],
+      ['svgo']
     ]
   };
 
