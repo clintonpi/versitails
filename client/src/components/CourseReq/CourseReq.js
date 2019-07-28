@@ -29,6 +29,7 @@ class CourseReq extends Component {
               className="w-100 bc-c1"
             />
           </div>
+          <a href="/public/Course Requirements 2019-2020.pdf" download="Course Requirements 2019-2020.pdf" className="block txt-al-c m-t-20 p-10 sub-text bc-c1 bd-r-20 bx-sh ol-0 pointer ttn-3">Download</a>
         </main>
       </Fragment>
     );
