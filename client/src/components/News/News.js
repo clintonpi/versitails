@@ -41,7 +41,8 @@ class News extends Component {
         if (this.mounted) {
           this.setState({ error: true });
         }
-      });
+      })
+      .then(() => scroll(0, 0));
   }
 
   componentWillUnmount() {
