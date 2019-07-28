@@ -41,7 +41,11 @@ app.get('/api/v1/news', (req, res) => {
       'X-RapidAPI-Key': process.env.XRapidAPIKey
     }
   })
-    .then(newsRes => res.status(200).json(newsRes.data))
+    .then((newsRes) => {
+      const newsData = newsRes.data;
+      newsData.value = newsData.value.sort((a, b) => a.datePublished < b.datePublished);
+      return res.status(200).json(newsData);
+    })
     .catch(() => {
       res.sendStatus(400);
     });
