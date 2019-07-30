@@ -59,21 +59,26 @@ class News extends Component {
       );
     }
 
+    let key = 0;
     const { articles } = this.state;
     const articlesList = articles.length ? (
       articles.map(({
         title, description, url, provider, datePublished, image
-      }) => (
-        <Article
-          title={ title }
-          description={ description }
-          url={ url }
-          source={ provider.name }
-          date={ datePublished }
-          thumbnail={ image.thumbnail }
-          key={ title }
-        />
-      ))
+      }) => {
+        key += 1;
+
+        return (
+          <Article
+            title={ title }
+            description={ description }
+            url={ url }
+            source={ provider.name }
+            date={ datePublished }
+            thumbnail={ image.thumbnail }
+            key={ key }
+          />
+        );
+      })
     ) : (
       <Fragment>
         <div className="loader sq-50 circle m-auto m-t-10 m-b-10 ttn-3" />
