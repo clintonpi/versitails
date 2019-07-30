@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './News.scss';
 import Article from '../Article/Article';
-import generateSkeleton from './newsUtils';
+import { fetchArticles, generateSkeleton } from './newsUtils';
 import { documentTitle, reload } from '../../utils';
 
 class News extends Component {
@@ -24,17 +24,10 @@ class News extends Component {
 
     this.mounted = true;
 
-    const words = ['asuu', 'jamb', 'nigerian university', 'utme', 'waec', 'nigeria'];
-
-    const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
-
-    const keyword = `${getRandomWord()},${getRandomWord()},${getRandomWord()}`;
-
-    fetch(`/api/v1/news?pageNumber=${this.state.pageNumber}&keyword=${keyword}`)
-      .then(res => res.json())
-      .then((res) => {
+    fetchArticles(this.state.pageNumber)
+      .then((articles) => {
         if (this.mounted) {
-          this.setState({ articles: res.value });
+          this.setState({ articles });
         }
       })
       .catch(() => {

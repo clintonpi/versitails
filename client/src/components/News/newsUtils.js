@@ -1,6 +1,19 @@
 import React from 'react';
 import ArticleSkeleton from '../ArticleSkeleton/ArticleSkeleton';
 
+const fetchArticles = (pageNumber) => {
+  const words = ['asuu', 'jamb', 'nigerian university', 'utme', 'waec', 'nigeria'];
+
+  const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
+
+  const keyword = `${getRandomWord()},${getRandomWord()},${getRandomWord()}`;
+
+  return fetch(`/api/v1/news?pageNumber=${pageNumber}&keyword=${keyword}`)
+    .then(res => res.json())
+    .then(res => Promise.resolve(res.value))
+    .catch(() => Promise.reject());
+};
+
 const generateSkeleton = () => {
   const skeletonList = [];
 
@@ -11,4 +24,4 @@ const generateSkeleton = () => {
   return skeletonList;
 };
 
-export default generateSkeleton;
+export { fetchArticles, generateSkeleton };
