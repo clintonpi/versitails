@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './News.scss';
 import Article from '../Article/Article';
-import ArticleSkeleton from '../ArticleSkeleton/ArticleSkeleton';
+import generateSkeleton from './newsUtils';
 import { documentTitle, reload } from '../../utils';
 
 class News extends Component {
@@ -84,9 +84,7 @@ class News extends Component {
     ) : (
       <Fragment>
         <div className="loader sq-50 circle m-auto m-t-10 m-b-10 ttn-3" />
-        {
-          [1, 2, 3, 4, 5, 6, 7, 9, 10].map(num => <ArticleSkeleton key={ num } />)
-        }
+        { generateSkeleton() }
       </Fragment>
     );
 
