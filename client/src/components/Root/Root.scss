@@ -296,16 +296,6 @@ h3 {
   z-index: -1;
 }
 
-.loader {
-  border: 5px solid transparent;
-  border-top-color: $color1;
-  animation: rotate .4s infinite;
-}
-
-.dark .loader {
-  border-top-color: $color4;
-}
-
 .fill-bg {
   background-size: cover;
   background-repeat: no-repeat;

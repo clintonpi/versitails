@@ -1,0 +1,11 @@
+@import '../../partials/variables';
+
+.loader {
+  border: 5px solid transparent;
+  border-top-color: $color1;
+  animation: rotate .4s infinite;
+}
+
+.dark .loader {
+  border-top-color: $color4;
+}
