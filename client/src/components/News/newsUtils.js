@@ -2,7 +2,7 @@ import React from 'react';
 import ArticleSkeleton from '../ArticleSkeleton/ArticleSkeleton';
 
 const fetchArticles = (pageNumber) => {
-  const words = ['asuu', 'jamb', 'nigerian university', 'utme', 'waec', 'nigeria'];
+  const words = ['asuu', 'jamb', 'nigerian university', 'utme', 'waec', 'nigeria', 'unilag'];
 
   const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
 
