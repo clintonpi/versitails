@@ -10,7 +10,10 @@ const fetchArticles = (pageNumber) => {
 
   return fetch(`/api/v1/news?pageNumber=${pageNumber}&keyword=${keyword}`)
     .then(res => res.json())
-    .then(res => Promise.resolve(res.value))
+    .then((res) => {
+      const newPageNumber = pageNumber + 1;
+      return Promise.resolve([res.value, newPageNumber]);
+    })
     .catch(() => Promise.reject());
 };
 
@@ -24,4 +27,10 @@ const generateSkeleton = () => {
   return skeletonList;
 };
 
-export { fetchArticles, generateSkeleton };
+const removeFetchListener = fetchFunction => window.removeEventListener('scroll', fetchFunction);
+
+const addFetchListener = fetchFunction => window.addEventListener('scroll', fetchFunction);
+
+export {
+  fetchArticles, generateSkeleton, removeFetchListener, addFetchListener
+};

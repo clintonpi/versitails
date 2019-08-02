@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import './News.scss';
 import Article from '../Article/Article';
-import { fetchArticles, generateSkeleton } from './newsUtils';
+import Loader from '../Loader/Loader';
+import {
+  fetchArticles, generateSkeleton, removeFetchListener, addFetchListener
+} from './newsUtils';
 import { documentTitle, reload } from '../../utils';
 
 class News extends Component {
@@ -11,11 +14,55 @@ class News extends Component {
     this.state = {
       articles: [],
       error: false,
-      pageNumber: 1
+      pageNumber: 1,
+      loading: false
     };
 
     this.title = 'News Update';
     this.mounted = false;
+
+    this.fetchMore = this.fetchMore.bind(this);
+  }
+
+  fetchMore() {
+    const { body } = document;
+    const html = document.documentElement;
+
+    const pageHeight = Math.max(
+      body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight
+    );
+
+    const scrolledHeight = window.pageYOffset + window.innerHeight;
+
+    if (scrolledHeight > (pageHeight - 500)) { // 500px from the bottom of the page
+      removeFetchListener(this.fetchMore);
+      this.setState({ loading: true });
+      fetchArticles(this.state.pageNumber)
+        .then(([articles, newPageNumber]) => {
+          if (this.mounted) {
+            this.setState({
+              articles: [
+                ...this.state.articles,
+                ...articles
+              ],
+              pageNumber: newPageNumber
+            });
+            addFetchListener(this.fetchMore);
+          }
+        })
+        .catch(() => {
+          if (this.mounted) {
+            this.setState({ error: true });
+          }
+          scroll(0, 0);
+        })
+        .then(() => {
+          if (this.mounted) {
+            this.setState({ loading: false });
+          }
+        });
+    }
   }
 
   componentDidMount() {
@@ -25,9 +72,10 @@ class News extends Component {
     this.mounted = true;
 
     fetchArticles(this.state.pageNumber)
-      .then((articles) => {
+      .then(([articles, newPageNumber]) => {
         if (this.mounted) {
-          this.setState({ articles });
+          this.setState({ articles, pageNumber: newPageNumber });
+          addFetchListener(this.fetchMore);
         }
       })
       .catch(() => {
@@ -35,7 +83,9 @@ class News extends Component {
           this.setState({ error: true });
         }
       })
-      .then(() => scroll(0, 0));
+      .then(() => {
+        scroll(0, 0);
+      });
   }
 
   componentWillUnmount() {
@@ -81,7 +131,7 @@ class News extends Component {
       })
     ) : (
       <Fragment>
-        <div className="loader sq-50 circle m-auto m-t-10 m-b-10 ttn-3" />
+        <Loader />
         { generateSkeleton() }
       </Fragment>
     );
@@ -91,6 +141,7 @@ class News extends Component {
         <h2 className="main-text">{ this.title }</h2>
         <main className="news flex">
           { articlesList }
+          { this.state.loading ? <Loader /> : '' }
         </main>
       </Fragment>
     );
