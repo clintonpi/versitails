@@ -24,7 +24,8 @@ const postCSSLoader = {
 
 const config = {
   entry: {
-    bundle: [`${__dirname}/client/src/index.js`]
+    bundle: [`${__dirname}/client/src/index.js`],
+    unsupportedBrowser: [`${__dirname}/client/src/components/unsupportedBrowser/unsupportedBrowser.js`]
   },
   output: {
     libraryTarget: 'var',
