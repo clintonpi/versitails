@@ -1,12 +1,16 @@
 import React from 'react';
 import ArticleSkeleton from '../ArticleSkeleton/ArticleSkeleton';
 
-const fetchArticles = (pageNumber) => {
-  const words = ['asuu', 'jamb', 'nigerian university', 'utme', 'waec', 'nigeria', 'unilag'];
+const fetchArticles = (pageNumber, searchKeyword) => {
+  let keyword;
 
-  const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
-
-  const keyword = `${getRandomWord()},${getRandomWord()},${getRandomWord()}`;
+  if (searchKeyword) {
+    keyword = searchKeyword;
+  } else {
+    const words = ['asuu', 'jamb', 'nigerian university', 'utme', 'waec', 'nigeria', 'unilag'];
+    const getRandomWord = () => words[Math.floor(Math.random() * words.length)];
+    keyword = `${getRandomWord()},${getRandomWord()},${getRandomWord()}`;
+  }
 
   return fetch(`/api/v1/news?pageNumber=${pageNumber}&keyword=${keyword}`)
     .then(res => res.json())

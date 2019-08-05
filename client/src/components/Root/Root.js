@@ -8,6 +8,7 @@ import { faSun } from '@fortawesome/free-solid-svg-icons/faSun';
 import { faMoon } from '@fortawesome/free-solid-svg-icons/faMoon';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
+import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import './Root.scss';
 import Navbar from '../Navbar/Navbar';
 import Home from '../Home/Home';
@@ -19,7 +20,7 @@ import QAndA from '../QAndA/QAndA';
 import PUtmeScore from '../PUtmeScore/PUtmeScore';
 import Footer from '../Footer/Footer';
 
-library.add(faEllipsisH, faHome, faShareAlt, faSun, faMoon, faCheckCircle, faHeart);
+library.add(faEllipsisH, faHome, faShareAlt, faSun, faMoon, faCheckCircle, faHeart, faSearch);
 
 const saveTheme = theme => localStorage.setItem('theme', theme);
 

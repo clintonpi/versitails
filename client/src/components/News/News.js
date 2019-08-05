@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './News.scss';
 import Article from '../Article/Article';
 import Loader from '../Loader/Loader';
@@ -15,13 +16,18 @@ class News extends Component {
       articles: [],
       error: false,
       pageNumber: 1,
-      loading: false
+      loading: false,
+      searchKeyword: ''
     };
 
     this.title = 'News Update';
     this.mounted = false;
 
+    this.searchInput = React.createRef();
+
     this.fetchMore = this.fetchMore.bind(this);
+    this.getArticles = this.getArticles.bind(this);
+    this.search = this.search.bind(this);
   }
 
   fetchMore() {
@@ -38,7 +44,7 @@ class News extends Component {
     if (scrolledHeight > (pageHeight - 500)) { // 500px from the bottom of the page
       removeFetchListener(this.fetchMore);
       this.setState({ loading: true });
-      fetchArticles(this.state.pageNumber)
+      fetchArticles(this.state.pageNumber, this.state.searchKeyword)
         .then(([articles, newPageNumber]) => {
           if (this.mounted) {
             this.setState({
@@ -65,13 +71,9 @@ class News extends Component {
     }
   }
 
-  componentDidMount() {
-    document.title = `${documentTitle}${this.title}`;
-    scroll(0, 0);
-
-    this.mounted = true;
-
-    fetchArticles(this.state.pageNumber)
+  getArticles(pageNumber, searchKeyword) {
+    removeFetchListener(this.fetchMore);
+    fetchArticles(pageNumber, searchKeyword)
       .then(([articles, newPageNumber]) => {
         if (this.mounted) {
           this.setState({ articles, pageNumber: newPageNumber });
@@ -86,6 +88,30 @@ class News extends Component {
       .then(() => {
         scroll(0, 0);
       });
+  }
+
+  search(e) {
+    e.preventDefault();
+
+    const searchKeyword = this.searchInput.current.value;
+
+    this.setState({
+      articles: [],
+      pageNumber: 1,
+      loading: false,
+      searchKeyword
+    });
+
+    this.getArticles(1, searchKeyword);
+    scroll(0, 0);
+  }
+
+  componentDidMount() {
+    document.title = `${documentTitle}${this.title}`;
+    scroll(0, 0);
+
+    this.mounted = true;
+    this.getArticles(this.state.pageNumber);
   }
 
   componentWillUnmount() {
@@ -140,6 +166,11 @@ class News extends Component {
       <Fragment>
         <h2 className="main-text">{ this.title }</h2>
         <main className="news flex">
+          <form onSubmit={ e => this.search(e) } className="search flex jst-cnt-sb w-700 mx-w-100 m-auto m-b-20">
+            <input type="text" placeholder="Search for your interests here" className="sub-text bc-c1 ol-0 bd-0 bd-r-5 p-10 fs-in bx-sh ttn-3"
+            ref={ this.searchInput } required />
+            <button className="main-text bc-c1 ol-0 bd-0 circle p-10 fs-in bx-sh ttn-3 pointer" aria-label="search"><FontAwesomeIcon icon="search" /></button>
+          </form>
           { articlesList }
           { this.state.loading ? <Loader /> : '' }
         </main>
