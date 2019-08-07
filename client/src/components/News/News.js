@@ -176,7 +176,7 @@ class News extends Component {
         <h2 className="main-text">{ this.title }</h2>
         <main className="news flex">
           <form onSubmit={ e => this.search(e) } className="search flex jst-cnt-sb w-700 mx-w-100 m-auto m-b-20">
-            <input type="text" placeholder="Search for your interests here" className="sub-text bc-c1 ol-0 bd-0 bd-r-5 p-10 fs-in bx-sh ttn-3"
+            <input type="text" placeholder="Search for your interests here" className="sub-text bc-c1 ol-0 bd-0 bd-r-20 p-10 fs-in bx-sh ttn-3"
             ref={ this.searchInput } required />
             <button className="main-text bc-c1 ol-0 bd-0 circle p-10 fs-in bx-sh ttn-3 pointer" aria-label="search"><FontAwesomeIcon icon="search" /></button>
           </form>
