@@ -6,6 +6,7 @@ import Loader from '../Loader/Loader';
 import {
   fetchArticles, generateSkeleton, removeFetchListener, addFetchListener
 } from './newsUtils';
+import NewsResult from './NewsResult';
 import { documentTitle, reload } from '../../utils';
 
 class News extends Component {
@@ -17,7 +18,9 @@ class News extends Component {
       error: false,
       pageNumber: 1,
       loading: false,
-      searchKeyword: ''
+      searchKeyword: '',
+      noResult: false,
+      lastResult: false
     };
 
     this.title = 'News Update';
@@ -43,10 +46,10 @@ class News extends Component {
 
     if (scrolledHeight > (pageHeight - 500)) { // 500px from the bottom of the page
       removeFetchListener(this.fetchMore);
-      this.setState({ loading: true });
+      this.setState({ loading: true, lastResult: false });
       fetchArticles(this.state.pageNumber, this.state.searchKeyword)
         .then(([articles, newPageNumber]) => {
-          if (this.mounted) {
+          if (this.mounted && articles.length > 0) {
             this.setState({
               articles: [
                 ...this.state.articles,
@@ -55,6 +58,8 @@ class News extends Component {
               pageNumber: newPageNumber
             });
             addFetchListener(this.fetchMore);
+          } else {
+            this.setState({ lastResult: true });
           }
         })
         .catch(() => {
@@ -73,11 +78,14 @@ class News extends Component {
 
   getArticles(pageNumber, searchKeyword) {
     removeFetchListener(this.fetchMore);
+    this.setState({ noResult: false });
     fetchArticles(pageNumber, searchKeyword)
       .then(([articles, newPageNumber]) => {
-        if (this.mounted) {
+        if (this.mounted && articles.length > 0) {
           this.setState({ articles, pageNumber: newPageNumber });
           addFetchListener(this.fetchMore);
+        } else {
+          this.setState({ noResult: true });
         }
       })
       .catch(() => {
@@ -99,7 +107,8 @@ class News extends Component {
       articles: [],
       pageNumber: 1,
       loading: false,
-      searchKeyword
+      searchKeyword,
+      searchResultMessage: ''
     });
 
     this.getArticles(1, searchKeyword);
@@ -171,7 +180,11 @@ class News extends Component {
             ref={ this.searchInput } required />
             <button className="main-text bc-c1 ol-0 bd-0 circle p-10 fs-in bx-sh ttn-3 pointer" aria-label="search"><FontAwesomeIcon icon="search" /></button>
           </form>
-          { articlesList }
+          <NewsResult
+            noResult={ this.state.noResult }
+            lastResult={ this.state.lastResult }
+            articlesList={ articlesList }
+          />
           { this.state.loading ? <Loader /> : '' }
         </main>
       </Fragment>
