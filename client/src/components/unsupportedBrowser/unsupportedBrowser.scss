@@ -1,0 +1,107 @@
+@import '../../partials/reset.min';
+@import '../../partials/variables';
+
+// Use default styles, so as to match styles from the major css file in case its download was not interrupted by data savers in browsers.
+
+a {
+  text-decoration: none;
+}
+
+.main-text {
+  font-family: $main-text;
+  font-weight: bold;
+  color: $color4;
+}
+
+.sub-text {
+  font-family: $sub-text;
+  color: $color3;
+}
+
+.block {
+  display: block;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-700 {
+  width: 700px;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.m-t-10 {
+  margin-top: $spacing;
+}
+
+.m-b-10 {
+  margin-bottom: $spacing;
+}
+
+.p-5 {
+  padding: 5px;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.pos-ab {
+  position: absolute;
+}
+
+.t-0 {
+  top: 0;
+}
+
+.bx-sh-fx {
+  box-shadow: $box-shadow-sm;
+}
+
+.bx-sh {
+  box-shadow: $box-shadow-sm;
+
+  &:hover, &:focus {
+    box-shadow: $box-shadow-bg;
+  }
+}
+
+.ttn-3 {
+  transition: .3s;
+}
+
+.bd-0 {
+  border: 0;
+}
+
+.bd-r-20 {
+  border-radius: 20px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.ol-0 {
+  outline: 0;
+}
+
+.txt-al-c {
+  text-align: center;
+}
+
+.bc-c1 {
+  background-color: $color1;
+}
+
+.bc-c2 {
+  background-color: $color2;
+}
+
+.cl-in, .cl-in * {
+  color: inherit;
+}
