@@ -19,6 +19,7 @@ import AdmissionProb from '../AdmissionProb/AdmissionProb';
 import QAndA from '../QAndA/QAndA';
 import PUtmeScore from '../PUtmeScore/PUtmeScore';
 import Footer from '../Footer/Footer';
+import AskToInstall from '../AskToInstall/AskToInstall';
 
 library.add(faEllipsisH, faHome, faShareAlt, faSun, faMoon, faCheckCircle, faHeart, faSearch);
 
@@ -30,9 +31,11 @@ class Root extends Component {
 
     this.default = 'default';
     this.dark = 'dark';
+    this.deferredPrompt = null;
 
     this.state = {
-      theme: this.default
+      theme: this.default,
+      timeToInstall: false
     };
 
     this.switchTo = this.switchTo.bind(this);
@@ -44,6 +47,15 @@ class Root extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // This is the best place to add the event listener
+      // as beforeinstallprompt takes some time after page load before it fires.
+      e.preventDefault();
+
+      this.deferredPrompt = e;
+      setTimeout(() => this.setState({ timeToInstall: true }), 60000);
+    });
+
     const theme = localStorage.getItem('theme');
 
     if (theme === this.default || theme === this.dark) {
@@ -85,6 +97,7 @@ class Root extends Component {
             <Route exact path='/question' component={ QAndA } />
             <Route exact path='/post-utme-score' component={ PUtmeScore } />
             <Footer />
+            { this.state.timeToInstall ? <AskToInstall deferredPrompt={ this.deferredPrompt } /> : '' }
           </div>
         </BrowserRouter>
     );
